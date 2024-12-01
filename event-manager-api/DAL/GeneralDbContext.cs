@@ -5,8 +5,9 @@ namespace WebAppWorkshop.DAL
 {
     public class GeneralDbContext : DbContext
     {
-        public GeneralDbContext(DbContextOptions<GeneralDbContext> o) : base(o) { }
-        public DbSet<Event> events { get; set; }
-        public DbSet<Location> locations { get; set; }
+        public GeneralDbContext(DbContextOptions<GeneralDbContext> options) : base(options) { }
+
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Location> Locations { get; set; }
     }
 }

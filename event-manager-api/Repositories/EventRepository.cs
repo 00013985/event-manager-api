@@ -7,34 +7,40 @@ namespace WebAppWorkshop.Repositories
     public class EventRepository : IRepository<Event>
     {
         private readonly GeneralDbContext _context;
+
         public EventRepository(GeneralDbContext context)
         {
-            _context = context; 
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
         public async Task AddAsync(Event entity)
         {
-            await _context.events.AddAsync(entity);
+            await _context.Events.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var a2dl = await _context.events.FindAsync(id);
-            if (a2dl != null)
-            {
-                _context.events.Remove(a2dl);
-                await _context.SaveChangesAsync();
-            }
+            var eventToDelete = await _context.Events.FindAsync(id);
+            if (eventToDelete == null) throw new KeyNotFoundException($"Event not found.");
+
+            _context.Events.Remove(eventToDelete);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Event>> GetAllAsync()
         {
-            return await _context.events.Include(t => t.Location).ToArrayAsync();
+            return await _context.Events.Include(t => t.Location).ToArrayAsync();
         }
 
         public async Task<Event> GetByIDAsync(int id)
         {
-            return await _context.events.Include(t => t.Location).FirstOrDefaultAsync(t => t.Id == id);
+            var eventEntity = await _context.Events
+                .Include(e => e.Location)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (eventEntity == null) throw new KeyNotFoundException($"Event with ID {id} not found.");
+            return eventEntity;
         }
 
         public async Task UpdateAsync(Event entity)
