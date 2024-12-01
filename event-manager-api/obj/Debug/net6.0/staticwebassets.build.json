@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "f/nF+wyYUeZc+ElJDQF2u3rtE3K4THHlkdi9MdecaDY=",
+  "Source": "event-manager-api",
+  "BasePath": "_content/event-manager-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
