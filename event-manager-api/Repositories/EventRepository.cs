@@ -15,8 +15,10 @@ namespace WebAppWorkshop.Repositories
 
         public async Task AddAsync(Event entity)
         {
+            entity.Location = await _context.Locations.FindAsync(entity.LocationId.Value);
             await _context.Events.AddAsync(entity);
             await _context.SaveChangesAsync();
+
         }
 
         public async Task DeleteAsync(int id)

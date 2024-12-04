@@ -49,7 +49,7 @@ namespace event_manager_api.Controllers
         public async Task<ActionResult<Location>> PostLocation(Location location)
         {
             await _repository.AddAsync(location);
-            return CreatedAtAction(nameof(GetLocation), new { id = location.Id }, location);
+            return Ok(location);
         }
 
         // DELETE: api/Locations/5

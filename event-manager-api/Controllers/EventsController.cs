@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using WebAppWorkshop.Models;
 using WebAppWorkshop.Repositories;
 
@@ -49,8 +50,7 @@ namespace event_manager_api.Controllers
         public async Task<ActionResult<Event>> PostEvent(Event @event)
         {
             await _repository.AddAsync(@event);
-            //return Ok(feat);
-            return CreatedAtAction(nameof(GetEvent), new { id = @event.Id }, @event);
+            return Ok(@event);
         }
 
         // DELETE: api/Events/5
